@@ -72,19 +72,19 @@ public class PlayerCtrl : MonoBehaviour {
 		//키보드 입력값을 기준으로 동작할 애니메이션 수행
 		if (v >= 0.1f) {
 			//전진 애니메이션
-			_animation.CrossFade (anim.runForward.name, 0.3f);
+			_animation.CrossFade (anim.runForward.name, 0.1f);
 		} else if (v <= -0.1f) {
 			//후진 애니메이션
-			_animation.CrossFade (anim.runBackward.name, 0.3f);
+			_animation.CrossFade (anim.runBackward.name, 0.1f);
 		} else if (h >= 0.1f) {
 			//오른쪽 이동 애니메이션
-			_animation.CrossFade (anim.runRight.name, 0.3f);
+			_animation.CrossFade (anim.runRight.name, 0.1f);
 		} else if (h <= -0.1f) {
 			//왼쪽 이동 애니메이션
-			_animation.CrossFade (anim.runLeft.name, 0.3f);
+			_animation.CrossFade (anim.runLeft.name, 0.1f);
 		} else {
 			//정지시 idle 애니메이션
-			_animation.CrossFade (anim.idle.name, 0.3f);
+			_animation.CrossFade (anim.idle.name, 0.1f);
 		}
 
 	}

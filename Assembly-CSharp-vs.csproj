@@ -46,8 +46,12 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\02.Scripts\BulletCtrl.cs" />
+     <Compile Include="Assets\02.Scripts\FireCtrl.cs" />
      <Compile Include="Assets\02.Scripts\FollowCam.cs" />
+     <Compile Include="Assets\02.Scripts\MyGizmo.cs" />
      <Compile Include="Assets\02.Scripts\PlayerCtrl.cs" />
+     <Compile Include="Assets\02.Scripts\WallCtrl.cs" />
      <None Include="Assets\04.Images\Skyboxes\_skybox info.txt" />
  <Reference Include="UnityEngine.UI">
  <HintPath>P:/Editor/Data/UnityExtensions/Unity/GUISystem/4.7.2/Standalone/UnityEngine.UI.dll</HintPath>
