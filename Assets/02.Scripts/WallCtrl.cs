@@ -10,9 +10,9 @@ public class WallCtrl : MonoBehaviour {
 	{
 		if (coll.collider.tag == "BULLET") {
 
-			GameObject spark = (GameObject) Instantiate(sparkEffect, coll.transform.position, Quaternion.identity);
+			//GameObject spark = (GameObject) Instantiate(sparkEffect, coll.transform.position, Quaternion.identity);
 			// 컴포넌트의 수행시간이 지난 후 삭제 처리
-			Destroy (spark, spark.GetComponent<ParticleSystem>().duration + 0.2f);
+			//Destroy (spark, spark.GetComponent<ParticleSystem>().duration + 0.2f);
 
 			Destroy (coll.gameObject);
 		}

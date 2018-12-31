@@ -1,15 +1,8 @@
 Base path: P:/Editor/Data
-Pipe name: \\.\pipe\UnityShaderCompiler-1-9628
+Pipe name: \\.\pipe\UnityShaderCompiler-1-13536
 Cmd: getPlatforms
 Cmd: preprocess
-  insize=1725 outsize=1007 ok=1
+  insize=1808 outsize=1091 ok=1
 Cmd: compileSnippet
-  api=4 type=0 insize=1020 outsize=1274 kw= ok=1
-Cmd: compileSnippet
-  api=4 type=1 insize=1020 outsize=908 kw= ok=1
-Cmd: preprocess
-  insize=1725 outsize=1007 ok=1
-Cmd: preprocess
-  insize=1725 outsize=1007 ok=1
-Cmd: preprocess
-  insize=1725 outsize=1007 ok=1
+  error: 2 plat 4 at (53): undeclared identifier 'UnityObjectToClipPos'
+  api=4 type=0 insize=1019 outsize=0 kw= ok=0
