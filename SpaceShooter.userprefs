@@ -1,15 +1,15 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets\02.Scripts\MonsterCtrl.cs">
     <Files>
-      <File FileName="Assets\02.Scripts\BarrelCtrl.cs" Line="30" Column="5" />
+      <File FileName="Assets\02.Scripts\MonsterCtrl.cs" Line="63" Column="37" />
+      <File FileName="Assets\02.Scripts\BarrelCtrl.cs" Line="1" Column="1" />
       <File FileName="Assets\02.Scripts\BulletCtrl.cs" Line="1" Column="1" />
       <File FileName="Assets\02.Scripts\PlayerCtrl.cs" Line="1" Column="1" />
       <File FileName="Assets\02.Scripts\FollowCam.cs" Line="1" Column="1" />
       <File FileName="Assets\02.Scripts\MyGizmo.cs" Line="1" Column="1" />
       <File FileName="Assets\02.Scripts\FireCtrl.cs" Line="1" Column="1" />
       <File FileName="Assets\02.Scripts\WallCtrl.cs" Line="1" Column="1" />
-      <File FileName="Assets\02.Scripts\MonsterCtrl.cs" Line="16" Column="59" />
       <File FileName="Assets\Standard Assets\Particles\Legacy Particles\TimedObjectDestructor.js" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
