@@ -13,8 +13,11 @@ public class Anim
 }
 
 
-
 public class PlayerCtrl : MonoBehaviour {
+
+	public delegate void PlayerDieHandler();
+	public static event PlayerDieHandler OnPlayerDie;
+
 	private float h = 0.0f;
 	private float v = 0.0f;
 
@@ -33,14 +36,16 @@ public class PlayerCtrl : MonoBehaviour {
 	// 아래에 있는 3D 모델의 Animation 컴포넌트에 접근하기 위한 변수
 	public Animation _animation;
 
+	public int hp = 100;
+
 	// Use this for initialization
 	void Start () {
 		float vec1 = Vector3.Magnitude (Vector3.forward);
 		float vec2 = Vector3.Magnitude (Vector3.forward + Vector3.right);
 		float vec3 = Vector3.Magnitude ((Vector3.forward + Vector3.right).normalized); 
-		Debug.Log (vec1);
-		Debug.Log (vec2);
-		Debug.Log (vec3);
+		//Debug.Log (vec1);
+		//Debug.Log (vec2);
+		//Debug.Log (vec3);
 		// 스크립트 처음에 Transform 컴포넌트 할당
 		tr = GetComponent<Transform> ();
 	
@@ -57,8 +62,8 @@ public class PlayerCtrl : MonoBehaviour {
 		h = Input.GetAxis ("Horizontal");
 		v = Input.GetAxis ("Vertical");
 
-		Debug.Log ("H=" + h.ToString ());
-		Debug.Log ("V=" + v.ToString ());
+		//Debug.Log ("H=" + h.ToString ());
+		//Debug.Log ("V=" + v.ToString ());
 
 		//전후좌우 이동 방햑 벡터 계산
 		Vector3 moveDir = (Vector3.forward * v) + (Vector3.right * h);
@@ -89,4 +94,35 @@ public class PlayerCtrl : MonoBehaviour {
 
 	}
 
+	void OnTriggerEnter(Collider coll)
+	{
+		//충돌한 Collider가 몬스터의 PUNCH이면 player의 HP 차감
+		if(coll.gameObject.tag== "PUNCH")
+		{
+			hp -= 10;
+			Debug.Log("Player HP =" + hp.ToString());
+
+			//player의 생명이 0 이하이면 사망처리
+			if (hp <= 0)
+			{
+				PlayerDie();
+			}
+
+		}
+	}
+
+	void PlayerDie()
+	{
+		Debug.Log ("Player Die!!");
+
+		//MONSTER TAG를 가진 모든 게임오브젝트를 찾아옴
+		//GameObject[] monsters = GameObject.FindGameObjectsWithTag ("MONSTER");
+
+		//모든 몬스터의 OnPlayerDie 함수를 순차적으로 호출
+		//foreach (GameObject monster in monsters) 
+		//{
+		//	monster.SendMessage("OnPlayerDie", SendMessageOptions.DontRequireReceiver);
+		//}
+		OnPlayerDie ();
+	}
 }

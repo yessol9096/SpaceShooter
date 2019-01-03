@@ -31,7 +31,7 @@ public class FireCtrl : MonoBehaviour {
 		source.PlayOneShot (fireSfx, 0.9f);
 		StartCoroutine (this.ShowMuzzleFlash ());
 	}
-
+	                                                            
 	void CreateBullet(){
 		Instantiate (bullet, firePos.position, firePos.rotation);
 	}

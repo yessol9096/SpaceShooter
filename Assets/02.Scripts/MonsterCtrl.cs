@@ -21,6 +21,10 @@ public class MonsterCtrl : MonoBehaviour {
 	//몬스터의 사망 여부
 	private bool isDie = false;
 
+	public GameObject bloodEffect;
+	public GameObject bloodDecal;
+
+	private int hp = 100;
 
 	// Use this for initialization
 	void Start () {
@@ -87,13 +91,84 @@ public class MonsterCtrl : MonoBehaviour {
 				case MonsterState.trace:
 					nvAgent.destination = playerTr.position;
 					nvAgent.Resume();
+					animator.SetBool("IsAttack", false);
 					animator.SetBool("IsTrace", true);
 					break;
 			
 				case MonsterState.attack:
+					nvAgent.Stop ();
+					animator.SetBool("IsAttack", true);
 					break;
 			}
 			yield return null;
 		}
 	}
+
+	void OnCollisionEnter(Collision coll)
+	{
+		if (coll.gameObject.tag == "BULLET") 
+		{
+			CreateBloodEffect(coll.transform.position);
+
+			hp -= coll.gameObject.GetComponent<BulletCtrl>().damage;
+			if(hp <= 0)
+			{
+				MonsterDie();
+			}
+			Destroy(coll.gameObject);
+			animator.SetTrigger("IsHit");
+		}
+	}
+
+	void MonsterDie()
+	{
+		StopAllCoroutines ();
+
+		isDie = true;
+		monsterState = MonsterState.die;
+		nvAgent.Stop ();
+		animator.SetTrigger ("IsDie");
+
+		gameObject.GetComponentInChildren<CapsuleCollider> ().enabled = false;
+
+		foreach (Collider coll in gameObject.GetComponentsInChildren<SphereCollider>()) 
+		{
+			coll.enabled = false;
+		}
+		
+	}
+
+	void CreateBloodEffect(Vector3 pos)
+	{
+		GameObject blood1 = (GameObject)Instantiate (bloodEffect, pos, Quaternion.identity);
+		Destroy (blood1, 2.0f);
+
+		Vector3 decalPos = monsterTr.position + (Vector3.up * 0.05f);
+		//데칼의 회전값을 무작위로 설정
+		Quaternion decalRot = Quaternion.Euler (90, 0, Random.Range (0, 360));
+
+		GameObject blood2 = (GameObject)Instantiate (bloodDecal, decalPos, decalRot);
+		float scale = Random.Range (1.5f, 3.5f);
+		blood2.transform.localScale = Vector3.one * scale;
+
+		Destroy (blood2, 5.0f);
+	}
+
+	void OnPlayerDie()
+	{
+		StopAllCoroutines ();
+		nvAgent.Stop ();
+		animator.SetTrigger ("IsPlayerDie");
+	}
+
+	void OnEnable()
+	{
+		PlayerCtrl.OnPlayerDie += this.OnPlayerDie;
+	}
+
+	void OnDisable()
+	{
+		PlayerCtrl.OnPlayerDie -= this.OnPlayerDie;
+	}
+
 }
