@@ -40,9 +40,9 @@ public class PlayerCtrl : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		float vec1 = Vector3.Magnitude (Vector3.forward);
-		float vec2 = Vector3.Magnitude (Vector3.forward + Vector3.right);
-		float vec3 = Vector3.Magnitude ((Vector3.forward + Vector3.right).normalized); 
+		//float vec1 = Vector3.Magnitude (Vector3.forward);
+		//float vec2 = Vector3.Magnitude (Vector3.forward + Vector3.right);
+		//float vec3 = Vector3.Magnitude ((Vector3.forward + Vector3.right).normalized); 
 		//Debug.Log (vec1);
 		//Debug.Log (vec2);
 		//Debug.Log (vec3);

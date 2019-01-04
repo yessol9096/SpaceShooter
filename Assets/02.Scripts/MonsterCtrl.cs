@@ -26,6 +26,8 @@ public class MonsterCtrl : MonoBehaviour {
 
 	private int hp = 100;
 
+	private GameUI gameUI;
+
 	// Use this for initialization
 	void Start () {
 		// 몬스터의 Transform 할당
@@ -45,6 +47,7 @@ public class MonsterCtrl : MonoBehaviour {
 		//몬스터의 상태에 따라 동작하는 루틴을 실행하는 코루틴 함수 실행
 		StartCoroutine (this.MonsterAction ());
 
+		gameUI = GameObject.Find ("GameUI").GetComponent<GameUI> ();
 	}
 
 	IEnumerator CheckMonsterState()
@@ -135,7 +138,8 @@ public class MonsterCtrl : MonoBehaviour {
 		{
 			coll.enabled = false;
 		}
-		
+
+		gameUI.DispScore(50);
 	}
 
 	void CreateBloodEffect(Vector3 pos)
