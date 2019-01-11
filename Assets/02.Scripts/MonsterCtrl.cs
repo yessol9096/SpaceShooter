@@ -29,7 +29,7 @@ public class MonsterCtrl : MonoBehaviour {
 	private GameUI gameUI;
 
 	// Use this for initialization
-	void Start () {
+	void Awake () {
 		// 몬스터의 Transform 할당
 		monsterTr = this.gameObject.GetComponent<Transform> ();
 		// 추적 대상인 Player의 Transform 할당
@@ -40,12 +40,6 @@ public class MonsterCtrl : MonoBehaviour {
 		animator = this.gameObject.GetComponent<Animator> ();
 		// 추적 대상의 위치를 설정하면 바로 추적 시작
 		//nvAgent.destination = playerTr.position;
-
-		//일정한 간격으로 몬스터의 행동 상태를 체크하는 코루틴 함수 실행
-		StartCoroutine (this.CheckMonsterState ());
-
-		//몬스터의 상태에 따라 동작하는 루틴을 실행하는 코루틴 함수 실행
-		StartCoroutine (this.MonsterAction ());
 
 		gameUI = GameObject.Find ("GameUI").GetComponent<GameUI> ();
 	}
@@ -125,6 +119,9 @@ public class MonsterCtrl : MonoBehaviour {
 
 	void MonsterDie()
 	{
+		//사망한 몬스터의 태그를 Untagged로 변경
+		gameObject.tag = "Untagged";
+
 		StopAllCoroutines ();
 
 		isDie = true;
@@ -168,6 +165,12 @@ public class MonsterCtrl : MonoBehaviour {
 	void OnEnable()
 	{
 		PlayerCtrl.OnPlayerDie += this.OnPlayerDie;
+
+		//일정한 간격으로 몬스터의 행동 상태를 체크하는 코루틴 함수 실행
+		StartCoroutine (this.CheckMonsterState ());
+		
+		//몬스터의 상태에 따라 동작하는 루틴을 실행하는 코루틴 함수 실행
+		StartCoroutine (this.MonsterAction ());
 	}
 
 	void OnDisable()

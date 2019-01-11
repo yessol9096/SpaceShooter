@@ -51,6 +51,7 @@
      <Compile Include="Assets\02.Scripts\DelegateTest.cs" />
      <Compile Include="Assets\02.Scripts\FireCtrl.cs" />
      <Compile Include="Assets\02.Scripts\FollowCam.cs" />
+     <Compile Include="Assets\02.Scripts\GameMgr.cs" />
      <Compile Include="Assets\02.Scripts\GameUI.cs" />
      <Compile Include="Assets\02.Scripts\MonsterCtrl.cs" />
      <Compile Include="Assets\02.Scripts\MyGizmo.cs" />

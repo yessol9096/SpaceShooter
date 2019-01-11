@@ -12,6 +12,8 @@ public class GameUI : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		// 처음 실행 후 저장된 스코어 정보 로드
+		totScore = PlayerPrefs.GetInt ("TOT_SCORE", 0);
 		DispScore(0);
 	}
 	
@@ -19,5 +21,8 @@ public class GameUI : MonoBehaviour {
 	{
 		totScore += score;
 		txtScore.text = "score <color=#ff0000>" + totScore.ToString () + "</color>";
+
+		//스코어 저장
+		PlayerPrefs.SetInt ("TOT_SCORE", totScore);
 	}
 }

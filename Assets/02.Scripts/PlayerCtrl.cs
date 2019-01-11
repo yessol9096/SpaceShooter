@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 // inspector 뷰에 노출 하기 위함
 [System.Serializable]
@@ -14,12 +15,13 @@ public class Anim
 
 
 public class PlayerCtrl : MonoBehaviour {
-
+	
 	public delegate void PlayerDieHandler();
 	public static event PlayerDieHandler OnPlayerDie;
 
 	private float h = 0.0f;
 	private float v = 0.0f;
+	private GameMgr gameMgr;
 
 	// 접근 해야 하는 컴포넌트는 반드시 변수에 할당한 후 사용
 	private Transform tr;
@@ -37,6 +39,11 @@ public class PlayerCtrl : MonoBehaviour {
 	public Animation _animation;
 
 	public int hp = 100;
+	//player의 생명 초깃값
+	private int initHp;
+
+	//player의 health bar 이미지
+	public Image imgHpbar;
 
 	// Use this for initialization
 	void Start () {
@@ -49,12 +56,15 @@ public class PlayerCtrl : MonoBehaviour {
 		// 스크립트 처음에 Transform 컴포넌트 할당
 		tr = GetComponent<Transform> ();
 	
+		gameMgr = GameObject.Find ("GameManager").GetComponent<GameMgr> ();
 
 		_animation = GetComponentInChildren<Animation> ();
 
 		//Animation 컴포넌트의 애니메이션 클립을 지정하고 실행
 		_animation.clip = anim.idle;
 		_animation.Play ();
+
+		initHp = hp;
 	}
 	
 	// Update is called once per frame
@@ -100,6 +110,10 @@ public class PlayerCtrl : MonoBehaviour {
 		if(coll.gameObject.tag== "PUNCH")
 		{
 			hp -= 10;
+
+			//Image UI 항목의 fillAmount 속성을 조절해 생명 게이지 값 조절
+			imgHpbar.fillAmount = (float)hp / (float)initHp;
+
 			Debug.Log("Player HP =" + hp.ToString());
 
 			//player의 생명이 0 이하이면 사망처리
@@ -124,5 +138,8 @@ public class PlayerCtrl : MonoBehaviour {
 		//	monster.SendMessage("OnPlayerDie", SendMessageOptions.DontRequireReceiver);
 		//}
 		OnPlayerDie ();
+		// 게임 매니저의 isGameOver 변숫값을 변경해 몬스터 출현을 중지시킴
+		GameMgr.instance.isGameOver = true;
+
 	}
 }
